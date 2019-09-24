@@ -11,8 +11,7 @@ const passport = require("passport");
 // @desc    Register a user
 // @access  Public
 router.post("/register", (req, res) => {
-  User.findOne({ email: req.body.email })
-    .then(user => {
+  User.findOne({ email: req.body.email }).then(user => {
       if (user) {
         return res.status(400).json({ email: "Email already exists" });
       } else {
@@ -90,6 +89,7 @@ router.post("/login", (req, res) => {
     .catch(err => console.log(err));
 });
 
+<<<<<<< HEAD
 // @route  GET api/users/current
 // @description return current user
 // @access Private
@@ -106,4 +106,6 @@ router.get(
   }
 );
 
+=======
+>>>>>>> 61f4ea3696a25559a2676cdffd16a1af0d9c047e
 module.exports = router;
