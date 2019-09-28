@@ -1,19 +1,28 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const User = require("../../models/User");
-const gravatar = require("gravatar");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const keys = require("../../config/keys");
-const passport = require("passport");
+const User = require('../../models/User');
+const gravatar = require('gravatar');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const keys = require('../../config/keys');
+const passport = require('passport');
+const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
 
 // @route   POST api/users/register
 // @desc    Register a user
 // @access  Public
 router.post("/register", (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   User.findOne({ email: req.body.email }).then(user => {
       if (user) {
-        return res.status(400).json({ email: "Email already exists" });
+        errors.email = 'Email already exists';
+        return res.status(400).json(errors);
       } else {
         const avatar = gravatar.url(req.body.email, {
           s: "200",
@@ -46,66 +55,53 @@ router.post("/register", (req, res) => {
 // @route  POST api/users/login
 // @description Login a user / return JWT token
 // @access Public
-router.post("/login", (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+router.post("/login", (req, res) =>{
+    const { errors, isValid } = validateLoginInput(req.body);
 
-  //Find user by email (email = email)
-  User.findOne({ email })
-    .then(user => {
-      if (!user) {
-        return res.status(400).json({
-          email: "User not found"
-        });
-      }
-      bcrypt
-        .compare(password, user.password)
-        .then(isMatch => {
-          if (!isMatch) {
-            return res.status(400).json({
-              password: "Password does not match."
-            });
-          }
-          const payload = {
-            id: user.id,
-            name: user.name,
-            avatar: user.avatar
-          };
-          jwt.sign(
-            payload,
-            keys.secretOrKey,
-            { expiresIn: 3600 },
-            (err, token) => {
-              if (err) throw err;
-              return res.json({
-                sucess: true,
-                token: "Bearer " + token
-              });
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+    const email = req.body.email;
+    const password = req.body.password;
+ 
+    //Find user by email (email = email)
+    User.findOne({email}).then(user =>{
+        if (!user){
+            errors.email = 'User not found';
+            return res.status(400).json(errors);
+        }
+        bcrypt.compare(password, user.password).then(isMatch => {
+            if (!isMatch){
+                errors.email = "Password does not match."
+                return res.status(400).json(errors);
             }
-          );
-        })
-        .catch(err => console.log(err));
-    })
-    .catch(err => console.log(err));
+            const payload = {
+                id: user.id,
+                name: user.name,
+                avatar: user.avatar
+            };
+            jwt.sign(payload, keys.secretOrKey, {expiresIn: 3600}, (err, token) => {
+                if (err) throw err;
+                return res.json({
+                    sucess: true,
+                    token:'Bearer ' + token
+                })
+            })
+        }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
 });
 
-<<<<<<< HEAD
+
 // @route  GET api/users/current
 // @description return current user
 // @access Private
 
-router.get(
-  "/current",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.json({
       id: req.user.id,
       email: req.user.email,
       name: req.user.name
     });
-  }
-);
+});
 
-=======
->>>>>>> 61f4ea3696a25559a2676cdffd16a1af0d9c047e
 module.exports = router;
