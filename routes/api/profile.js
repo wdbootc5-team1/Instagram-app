@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
-
 // Load Profile Model
 const Profile = require('../../models/Profile');
 // Load User Model
@@ -28,22 +27,36 @@ router.post(
     // Get fields
     const profileFields = {};
     profileFields.user = req.user.id;
-    if (req.body.handle) profileFields.handle = req.body.handle;
-    if (req.body.description) profileFields.description = req.body.description;
-    if (req.body.website) profileFields.website = req.body.website;
-    if (req.body.location) profileFields.location = req.body.location;
-    else profileFields.location = '';
-    if (req.body.status) profileFields.status = req.body.status;
-    if (req.body.bio) profileFields.bio = req.body.bio;
-    if (req.body.phone) profileFields.phone = req.body.phone;
+    if (typeof req.body !== 'undefined') {
+      if (typeof req.body.handle !== 'undefined')
+        profileFields.handle = req.body.handle;
+      if (typeof req.body.description !== 'undefined')
+        profileFields.description = req.body.description;
+      if (typeof req.body.website !== 'undefined')
+        profileFields.website = req.body.website;
+      if (typeof req.body.location !== 'undefined')
+        profileFields.location = req.body.location;
+      if (typeof req.body.status !== 'undefined')
+        profileFields.status = req.body.status;
+      if (typeof req.body.bio !== 'undefined')
+        profileFields.bio = req.body.bio;
+      if (typeof req.body.phone !== 'undefined')
+        profileFields.phone = req.body.phone;
 
-    // Social
-    profileFields.social = {};
-    if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
-    if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
-    if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
-    if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
-    if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
+      // Social
+      profileFields.social = {};
+      if (req.body.youtube)
+        profileFields.social.youtube = req.body.youtube;
+      if (req.body.twitter)
+        profileFields.social.twitter = req.body.twitter;
+      if (req.body.facebook)
+        profileFields.social.facebook = req.body.facebook;
+      if (req.body.linkedin)
+        profileFields.social.linkedin = req.body.linkedin;
+      if (req.body.instagram)
+        profileFields.social.instagram = req.body.instagram;
+    }
+    
 
     Profile.findOne({ user: req.user.id })
       .then(profile => {
@@ -108,7 +121,7 @@ router.get('/',
       })
       .catch(err => res.status(404).json(err));
   }
-)
+);
 
 // @route   GET api/profile/all
 // @desc    Get all profiles
@@ -170,6 +183,53 @@ router.get('/user/:user_id', (req, res) => {
       res.status(404).json({ profile: 'There is no profile for this user' })
     );
 });
+
+
+// @route   POST api/favorite
+// @desc    Add following/follower
+// @access  Private
+router.post('/favorite/:follower',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const errors = {};
+
+    Profile.find({
+      "$or": [{
+          "user": req.user.id // following add friend
+      }, {
+          "user": req.params.follower // follower
+      }]
+    })
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = 'There is no profile for this user';
+          return res.status(404).json(errors);
+        }
+        // count record; found both following and follower user
+        if (profile.length == 2 ) {
+          for (var i = 0; i < profile.length; i++) {
+            
+           if (profile[i].user == req.user.id) {
+             const newFollowing = {
+               user: req.params.follower
+             };
+             // Add to comments array
+             profile[i].following.unshift(newFollowing);
+           } else if (profile[i].user == req.params.follower) {
+             const newFollowing = {
+               user: req.user.id
+             };
+             // Add to comments array
+             profile[i].follower.unshift(newFollowing);
+          }
+        }}
+        
+
+        res.json(profile);
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
 
 module.exports = router;
 
