@@ -49,7 +49,20 @@ const ProfileSchema = new Schema({
     phone:{
         type: Number
     },
-    
+    following: [
+        {
+            user: {
+                type: String
+            }
+        }
+    ],
+    follower: [
+        {
+            user: {
+                type: String
+            }
+        }
+    ],
     date: {
         type: Date,
         default: Date.now
