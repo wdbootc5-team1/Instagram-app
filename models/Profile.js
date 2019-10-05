@@ -68,9 +68,6 @@ const ProfileSchema = new Schema({
         default: Date.now
     },
 
-    followers: [],
-
-    followings: []
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);
