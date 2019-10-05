@@ -164,23 +164,20 @@ router.get('/handle/:handle', (req, res) => {
 // @access  Public
 
 router.get('/user/:user_id', (req, res) => {
-	const errors = {};
+  const errors = {};
 
-	Profile.findOne({ user: req.params.user_id })
-		.populate('user', ['name', 'avatar'])
-		.then(profile => {
-			if (!profile) {
-				errors.noprofile = 'There is no profile for this user';
-				res.status(404).json(errors);
-			}
+  Profile.findOne({ user: req.params.user_id })
+    .populate('user', ['name', 'avatar'])
+    .then(profile => {
+      if (!profile) {
+	errors.noprofile = 'There is no profile for this user';
+	res.status(404).json(errors);
+      }
 
-			res.json(profile);
-		})
-		.catch(err =>
-			res
-				.status(404)
-				.json({ profile: 'There is no profile for this user' })
-		);
+      res.json(profile);
+  })
+  .catch(err => res.status(404).json({ profile: 'There is no profile for this user' })
+  );
 });
 
 
