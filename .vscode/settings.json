@@ -1,4 +1,5 @@
 {
     "debug.node.autoAttach": "on",
-    "prettier.singleQuote": true
+    "prettier.singleQuote": true,
+    "git.ignoreLimitWarning": true
 }
