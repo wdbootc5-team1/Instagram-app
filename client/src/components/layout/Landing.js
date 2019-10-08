@@ -11,7 +11,7 @@ export default class Landing extends Component {
               <div className="col-md-12 text-center">
                 <table align="center">
                   <tr>
-                    <td><img src={require('../../img/index1.jpg')}/></td>
+                    <td><img src={require('../../img/index1.jpg')} alt="Welcome to Instagram"/></td>
                     <td>
                       <h1 className="display-3 mb-4">Instagram</h1>
                       <p className="lead"> Create an Instagram profile and share posts to the world</p>
