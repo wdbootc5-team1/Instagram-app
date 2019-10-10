@@ -1,0 +1,62 @@
+img {
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  color: black;
+}
+.navbar-brand{
+  color:black;
+  justify-content: center;
+  font-size-adjust: 150%
+}
+
+.nav-link{
+  color:black;
+  justify-content: center;
+}
+.landing {
+  position: relative;
+  /* background: url('./img/index1.jpg') no-repeat; */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-top: -24px;
+  margin-bottom: -50px;
+}
+.display-3{
+  color: black;
+  font-size: xx-large;
+  
+}
+.lead {
+  color: black;
+}
+.landing-inner {
+  padding-top: 80px;
+}
+
+.dark-overlay {
+  background-color: lavenderblush;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card-form {
+  opacity: 0.9;
+}
+
+.latest-profiles-img {
+  width: 40px;
+  height: 40px;
+}
+
+.form-control::placeholder {
+  color: #bbb !important;
+}
