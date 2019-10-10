@@ -10,6 +10,7 @@ export default class Landing extends Component {
             <div className="row">
               <div className="col-md-12 text-center">
                 <table align="center">
+                  <tbody>
                   <tr>
                     <td><img src={require('../../img/index1.jpg')} alt="Welcome to Instagram"/></td>
                     <td>
@@ -19,7 +20,8 @@ export default class Landing extends Component {
                       <Link to="/register" className="btn btn-lg btn-info mr-2">Sign Up</Link>
                       <Link to="/login" className="btn btn-lg btn-light">Login</Link>
                     </td>
-                  </tr>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
