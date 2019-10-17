@@ -11,7 +11,7 @@ import store from './store';
 
 function App() {
   return (
-    // <Provider store={ store }>
+     <Provider store={ store }>
       <Router>
         <div className="App">
           <Navbar />
@@ -23,7 +23,7 @@ function App() {
           <Footer />
         </div>
       </Router>
-    // </Provider>
+     </Provider>
   );
 }
 
