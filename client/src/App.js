@@ -11,6 +11,8 @@ import store from './store';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
+import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 // Check for token
 if (localStorage.jwtToken) {
