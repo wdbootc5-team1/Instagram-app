@@ -16,6 +16,8 @@ import EditProfile from './components/edit-profile/EditProfile';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/common/PrivateRoute';
 import NotFound from './components/not-found/NotFound';
+import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 import './App.css';
 
