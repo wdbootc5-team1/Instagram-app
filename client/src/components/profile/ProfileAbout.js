@@ -9,7 +9,6 @@ class ProfileAbout extends Component {
         // Get first name
         const firstName = profile.user.name.trim().split(' ')[0];
 
-
         return (
             <div className="row">
                 <div className="col-md-12">

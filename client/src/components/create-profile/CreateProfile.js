@@ -13,7 +13,6 @@ class CreateProfile extends Component {
     this.state = {
       displaySocialInputs: false,
       handle: '',
-      description: '',
       website: '',
       location: '',
       status: '',
@@ -42,7 +41,6 @@ class CreateProfile extends Component {
 
     const profileData = {
       handle: this.state.handle,
-      description: this.state.description,
       website: this.state.website,
       location: this.state.location,
       status: this.state.status,
@@ -148,14 +146,6 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   error={errors.status}
                   info="Tell your status"
-                />
-                <TextFieldGroup
-                  placeholder="description"
-                  name="description"
-                  value={this.state.description}
-                  onChange={this.onChange}
-                  error={errors.description}
-                  info="Describe yourself"
                 />
                 <TextFieldGroup
                   placeholder="Website"
