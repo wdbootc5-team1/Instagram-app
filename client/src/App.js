@@ -66,7 +66,13 @@ class App extends Component {
                   exact
                   path="/edit-profile"
                   component={EditProfile}
-                />
+                />             
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/feed" component={Posts} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
               <Route exact path="/not-found" component={NotFound} />
             </div>
