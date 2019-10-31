@@ -53,9 +53,9 @@ class CreateProfile extends Component {
       instagram: this.state.instagram
     };
     
-    // clear previous error
-    this.state.errors.handle = '';
-    this.state.errors.status = '';
+    // // clear previous error
+    // this.state.errors.handle = '';
+    // this.state.errors.status = '';
 
     this.props.createProfile(profileData, this.props.history);
   }

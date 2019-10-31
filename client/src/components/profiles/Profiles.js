@@ -17,7 +17,7 @@ class Profiles extends Component {
         if (profiles === null || loading) {
             profileItems = <Spinner />;
         } else {
-            if (profiles.length > 0) {
+            if (undefined !== profiles && profiles.length > 0) {
                 profileItems = profiles.map(profile => (
                     <ProfileItem key={profile._id} profile={profile} />
                 ));
@@ -31,9 +31,9 @@ class Profiles extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
-                            <h1 className="display-4 text-center">Developer Profiles</h1>
+                            <h1 className="display-4 text-center">Explore Instagram</h1>
                             <p className="lead text-center">
-                                Browse and connect with developers
+                                Explore popular photos
               </p>
                             {profileItems}
                         </div>
