@@ -15,7 +15,7 @@ class PostForm extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    //this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -43,11 +43,11 @@ class PostForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  // handleChange(e) {
-  //   this.setState({
-  //     pictureUrl: URL.createObjectURL(e.target.files[0])
-  //   })
-  // }
+  handleChange(e) {
+    this.setState({
+      pictureUrl: URL.createObjectURL(e.target.files[0])
+    })
+  }
   render() {
     const { errors } = this.state;
 
@@ -66,7 +66,7 @@ class PostForm extends Component {
                     onChange={this.onChange}
                     error={errors.pictureUrl}
                   />
-                  {/* <input type="file" onChange={this.handleChange} /> */}
+                  <input type="file" onChange={this.handleChange} />
                   <img src={this.state.pictureUrl} />
                 </div>
               </div>
