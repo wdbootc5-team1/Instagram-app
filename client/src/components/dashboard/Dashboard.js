@@ -67,7 +67,7 @@ class Dashboard extends Component {
                       <h1 className="display-4">Dashboard</h1>
                       {dashboardContent}
                     </td>
-                    <td><img class="resize" src={require('../../img/index1.jpg')} alt="Welcome to Instagram" /></td>
+                    <td><img className="resize" src={require('../../img/index1.jpg')} alt="Welcome to Instagram" /></td>
                   </tr>
                 </tbody>
               </table>
