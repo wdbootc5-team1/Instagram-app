@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addPost } from '../../actions/postActions';
+import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+
 
 class PostForm extends Component {
   constructor(props) {
@@ -57,6 +59,13 @@ class PostForm extends Component {
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <div>
+                  <TextAreaFieldGroup
+                    placeholder="Create a post"
+                    name="pictureUrl"
+                    value={this.state.pictureUrl}
+                    onChange={this.onChange}
+                    error={errors.pictureUrl}
+                  />
                   <input type="file" onChange={this.handleChange} />
                   <img src={this.state.pictureUrl} />
                 </div>
