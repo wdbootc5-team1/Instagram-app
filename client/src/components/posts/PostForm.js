@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addPost } from '../../actions/postActions';
+import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+
 
 class PostForm extends Component {
   constructor(props) {
@@ -13,7 +15,7 @@ class PostForm extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    //this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -41,11 +43,11 @@ class PostForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleChange(e) {
-    this.setState({
-      pictureUrl: URL.createObjectURL(e.target.files[0])
-    })
-  }
+  // handleChange(e) {
+  //   this.setState({
+  //     pictureUrl: URL.createObjectURL(e.target.files[0])
+  //   })
+  // }
   render() {
     const { errors } = this.state;
 
@@ -57,7 +59,14 @@ class PostForm extends Component {
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <div>
-                  <input type="file" onChange={this.handleChange} />
+                  <TextAreaFieldGroup
+                    placeholder="Create a post"
+                    name="pictureUrl"
+                    value={this.state.pictureUrl}
+                    onChange={this.onChange}
+                    error={errors.pictureUrl}
+                  />
+                  {/* <input type="file" onChange={this.handleChange} /> */}
                   <img src={this.state.pictureUrl} />
                 </div>
               </div>
