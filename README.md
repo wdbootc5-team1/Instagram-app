@@ -9,7 +9,7 @@
 ### For Amazon Web Service S3
 1. Create Amazon Web Service S3 account at https://aws.amazon.com/
 2. Get accessKeyId and secretAccessKey
-3. Create bucket name "testinstagram"
+3. Create bucket name "testinstagram" and select Oregon region
 4. Provide public acesss for the bucket
 5. Set CORS configuration
 > <?xml version="1.0" encoding="UTF-8"?>
