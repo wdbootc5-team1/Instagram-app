@@ -60,3 +60,53 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
+.feed{
+  background-color:#fafafa;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.container{
+  background-color: #fafafa;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.text-info{
+color: black!important;
+}
+.bg-light{
+  background-color: floralwhite!important;
+}
+
+.bg-grey{
+  background-color: white;
+  position: relative;
+  background-position: center;
+}
+
+img.resize {
+  max-width:50%;
+  max-height:50%;
+}
+
+.text-white{
+ color:lightblue!important;
+}
+.btn{
+  color:black!important;
+  background-color:lightblue!important;
+}
+.btn-danger {
+    color:black;
+    background-color: #dc3545!important;
+    border-color: #dc3545!important;
+
+}
+.btn.btn-light{
+background-color:white!important;
+}

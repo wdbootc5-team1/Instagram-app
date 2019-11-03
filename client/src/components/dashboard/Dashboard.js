@@ -29,7 +29,7 @@ class Dashboard extends Component {
         dashboardContent = (
           <div>
             <p className="lead text-muted">
-              Welcome {user.name}
+              Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </p>
             <ProfileActions />
             <div style={{ marginBottom: '60px' }} />
@@ -59,9 +59,18 @@ class Dashboard extends Component {
       <div className="dashboard">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
-              <h1 className="display-4">Dashboard</h1>
-              {dashboardContent}
+            <div className="col-md-12 text-center">
+              <table align='center'>
+                <tbody>
+                  <tr>
+                    <td>
+                      <h1 className="display-4">Dashboard</h1>
+                      {dashboardContent}
+                    </td>
+                    <td><img className="resize" src={require('../../img/index1.jpg')} alt="Welcome to Instagram" /></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -73,7 +82,8 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

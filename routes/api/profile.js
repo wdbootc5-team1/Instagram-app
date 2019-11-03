@@ -29,8 +29,6 @@ router.post(
     if (typeof req.body !== 'undefined') {
       if (typeof req.body.handle !== 'undefined')
         profileFields.handle = req.body.handle;
-      if (typeof req.body.description !== 'undefined')
-        profileFields.description = req.body.description;
       if (typeof req.body.website !== 'undefined')
         profileFields.website = req.body.website;
       if (typeof req.body.location !== 'undefined')

@@ -101,6 +101,7 @@ class CreateProfile extends Component {
       youtube: this.state.youtube,
       instagram: this.state.instagram
     };
+    
     // clear previous error
     this.state.errors.handle = '';
     this.state.errors.status = '';

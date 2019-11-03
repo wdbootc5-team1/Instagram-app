@@ -44,8 +44,12 @@ class PostItem extends Component {
             <br />
             <p className="text-center">{post.name}</p>
           </div>
-          <div className="col-md-10">
-            <p className="lead">{post.pictureUrl}</p>
+          <div className="col-md-6">
+            <p className="lead">{post.text}</p>
+            <img className="d-none d-md-block"
+              src={post.pictureUrl}
+              alt=""
+            />
             {showActions ? (
               <span>
                 <button
@@ -67,7 +71,7 @@ class PostItem extends Component {
                 >
                   <i className="text-secondary fas fa-thumbs-down" />
                 </button>
-                <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
+                <Link to={`/post/${post._id}`} className="btn btn-info btn-dark mr-1">
                   Comments
                 </Link>
                 {post.user === auth.user.id ? (
