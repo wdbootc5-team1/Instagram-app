@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addPost } from '../../actions/postActions';
-import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
-
+import S3FileUpload from 'react-s3';
+const keyS3 = require('./KeyS3');
 
 class PostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    pictureUrl: '',
-    errors: {}
+      pictureUrl: '',
+      errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
@@ -36,17 +36,41 @@ class PostForm extends Component {
     };
 
     this.props.addPost(newPost);
-    this.setState({pictureUrl: '' });
-   }
+    this.setState({ pictureUrl: '' });
+  }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   handleChange(e) {
-    this.setState({
-      pictureUrl: URL.createObjectURL(e.target.files[0])
-    })
+
+    // The name of the bucket that you have created
+    const BUCKET_NAME = 'testinstagram';
+    
+    const uploadFile = (fileName) => {
+      // Uploading files to the bucket
+      const config = {
+        bucketName: BUCKET_NAME,
+        region: 'us-west-2',
+        accessKeyId: keyS3.accessKeyId,
+        secretAccessKey: keyS3.secretAccessKey
+      }
+
+      const file = e.target.files[0];
+      S3FileUpload
+        .uploadFile(file, config)
+        .then(data => {
+          console.log(data);
+          this.setState({
+            pictureUrl: data.location
+          });
+        })
+        .catch(err => console.error(err));
+    };
+
+    uploadFile();
+
   }
   render() {
     const { errors } = this.state;
@@ -59,13 +83,6 @@ class PostForm extends Component {
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <div>
-                  <TextAreaFieldGroup
-                    placeholder="Create a post"
-                    name="pictureUrl"
-                    value={this.state.pictureUrl}
-                    onChange={this.onChange}
-                    error={errors.pictureUrl}
-                  />
                   <input type="file" onChange={this.handleChange} />
                   <img src={this.state.pictureUrl} />
                 </div>
