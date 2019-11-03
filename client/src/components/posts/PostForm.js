@@ -46,7 +46,7 @@ class PostForm extends Component {
   handleChange(e) {
 
     // The name of the bucket that you have created
-    const BUCKET_NAME = 'testinstagram';
+    const BUCKET_NAME = 'sallyinstagramclone33';
     
     const uploadFile = (fileName) => {
       // Uploading files to the bucket

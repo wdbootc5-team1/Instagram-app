@@ -15,17 +15,7 @@ class ProfileItem extends Component {
                     </div>
                     <div className="col-lg-6 col-md-4 col-8">
                         <h3>{profile.user.name}</h3>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        <p>
-                            {profile.status}{' '}
-                        </p>
-=======
 
->>>>>>> 9b1c0eb42c7b315ac6cc90a41557537de1bcada1
-=======
-
->>>>>>> b658c6aed126d31ceb9cf99a50eb0492d4e1c435
                         <p>
                             {isEmpty(profile.location) ? null : (
                                 <span>{profile.location}</span>
