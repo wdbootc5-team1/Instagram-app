@@ -8,7 +8,8 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "ins": "concurrently \"npm run server\" \"npm run client\" "
+    "ins": "concurrently \"npm run server\" \"npm run client\" ",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Muchchima Pranita Sally",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "mongoose": "^5.7.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "path": "^0.12.7",
     "prop-types": "^15.7.2",
     "react-router-dom": "^5.1.2",
     "react-s3": "^1.3.1",
